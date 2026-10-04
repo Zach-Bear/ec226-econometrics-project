@@ -1,0 +1,740 @@
+\documentclass[12pt,a4paper]{article}
+ 
+% ---------------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage[referable]{threeparttablex}
+ 
+\onehalfspacing
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{0pt}
+ 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+ 
+% ---------------------------------------------------------------
+% TITLE
+% ---------------------------------------------------------------
+\title{\textbf{Does Homeownership Increase Life Satisfaction? \\
+Evidence from the United Kingdom, 2013--2022} \\[1em]
+\large EC226: Econometrics 1 --- Group Assignment}
+\author{Group 17}
+\date{May 2026}
+ 
+\begin{document}
+ 
+\maketitle
+\thispagestyle{empty}
+\newpage
+ 
+% ---------------------------------------------------------------
+% 1. INTRODUCTION
+% ---------------------------------------------------------------
+\section{Introduction}
+ 
+Homeownership has occupied a central place in the economic and social fabric of the UK for decades, associated with financial security, wealth accumulation, and personal well-being. The topic has gained prominence over the past two decades, as access to home ownership has become increasingly constrained, particularly for younger cohorts facing rising house prices and stagnant real incomes \citep{Cribb2018}. However, it remains unclear whether homeownership itself improves individuals' happiness or whether the observed relationship simply reflects the difference between those with the ability to purchase homes and those who are unable to do so.
+
+This paper investigates the causal relationship between housing tenure and life satisfaction in the UK, using panel data from Understanding Society (2013--2022). Our central research question is: \textit{Does homeownership increase life satisfaction, and does this effect vary by age group and mortgage status?} We contribute to the existing literature in three ways. First, we provide contemporary UK evidence on a question examined primarily in international contexts by \citet{Will2024} and \citet{Cho2023}. Second, we distinguish between outright owners, mortgaged owners, private renters, and social renters, allowing us to assess whether the benefit of ownership depends on whether it is debt-financed. Third, we test whether the ownership premium in life satisfaction differs across age groups, examining the hypothesis that younger cohorts --- who may have been largely priced out of the UK housing market --- derive no measurable satisfaction gain from the limited ownership they achieve.
+ 
+Our main findings are as follows. A pooled OLS regression yields a
+substantial positive association between ownership and life satisfaction, but
+this shrinks markedly upon the introduction of individual fixed effects,
+suggesting much of the raw association reflects selection rather than
+causal effect. Within the fixed effects framework, only debt-free outright
+ownership is associated with a statistically significant improvement in life
+satisfaction. Mortgaged ownership carries a smaller, marginally insignificant premium once individual unobservables are controlled for. Crucially, the ownership premium is entirely absent among respondents under 40, but present --- albeit marginally --- among those 40 plus. 
+Finally, we find no evidence that homeownership provided an additional buffer to life satisfaction during the COVID-19 pandemic, a null result that carries theoretical
+implications worth future study.
+ 
+The remainder of the paper is structured as follows. Section 2 reviews the
+relevant literature. Section 3 describes the data and variables. Section 4
+sets out the econometric methodology. Section 5 presents and interprets the empirical results. Section 6 concludes.
+ 
+% ---------------------------------------------------------------
+% 2. LITERATURE REVIEW
+% ---------------------------------------------------------------
+\section{Literature Review}
+ 
+The theoretical case for homeownership raising subjective wellbeing is based on several mechanisms: greater residential stability and security of tenure, pride associated with ownership, and housing wealth as a buffer against adverse income shocks
+\citep{Rohe2002}. Against these, ownership involves the servicing of mortgage debt,
+reduced geographic mobility, and exposure to the risk of a house price crash.
+ 
+\citet{Will2024} examine the relationship using the German Socio-Economic
+Panel and find that while housing satisfaction is higher for owners, life
+satisfaction does not show a significant long-run improvement following purchase.
+Germany is a low-ownership rental market with institutional support for
+long-term renting that does not exist in the UK \citep[p.~35]{Will2024},
+so their null result may reflect the social acceptability of renting rather than the general absence of an ownership premium.
+ 
+\citet{ViforJ2024} use Australian panel data and find that the wellbeing gap between owners and renters widens with age, that outright owners benefit more than mortgaged owners, and that mortgage debt can eliminate the ownership premium entirely beyond age 50. These findings directly motivated our empirical strategy.
+ 
+\citet{Cho2023} use the Korean Labour and Income Panel Study and find a
+positive effect of ownership on life satisfaction, particularly in the short
+term, with larger effects for lower-income households. This raises the
+possibility that the UK's widening affordability gap may be eroding the
+psychological return to ownership for those who historically benefited most.
+ 
+% ---------------------------------------------------------------
+% 3. DATA
+% ---------------------------------------------------------------
+\section{Data}
+ 
+\subsection{Understanding Society}
+ 
+Our analysis uses ten consecutive waves of Understanding Society (UKHLS),
+covering 2013--2022 (Waves e through n). Understanding Society is a
+longitudinal household panel survey conducted by the Institute for Social
+and Economic Research at the University of Essex, interviewing approximately
+40,000 UK households annually and re-interviewing the same individuals each
+wave \citep{UKHLS2023}.
+ 
+The panel is unbalanced, with individuals observed between one and
+ten times across the sample period. Of the 71,131 individuals with at
+least one observation, 14,699 appear in all ten waves and a further 5,816
+appear in nine, indicating substantial within-person variation. The full analytical sample, after restricting to adults aged 18 and over with valid responses on the outcome and key explanatory variables, comprises 312,942 person-wave observations.
+ 
+\subsection{Variables}
+ 
+\textbf{Dependent variable.} Life satisfaction is measured with the question ``How dissatisfied or satisfied are you with your life overall?'', recorded on a seven-point scale ranging from 1 (completely dissatisfied) to 7 (completely satisfied). This is a standard measure of subjective wellbeing in household panel surveys. While \citet{Will2024} and \citet{ViforJ2024} use a 0--10 scale, our measure is conceptually comparable. In our sample, the distribution is left-skewed, with a mean of 5.17 and a modal response of 6.
+ 
+\textbf{Key explanatory variable.} We take four categories of housing tenure from Understading Society: \textit{owned
+outright}, \textit{mortgaged}, \textit{social rent} (local authority or
+housing association), and \textit{private rent}. Employer-provided
+accommodation and residual categories are set to missing. Private rent
+serves as the reference category, as it represents the primary market
+alternative to ownership; coefficients are therefore interpreted as the
+difference in life satisfaction relative to private renters.
+ 
+\textbf{Control variables.} Following \citet{Will2024}, we include age and
+age-squared, log net personal income, a partnered dummy, number of children,
+and employment status dummies for unemployed, retired, and long-term sick
+respondents, with employed as the reference. These variables are included to mitigate the omitted variable bias, as they likely influence both the probability of homeownership and life satisfaction, thus confounding the relationship of interest. A binary COVID-19 indicator
+covers Waves l and m (2020--2021). Sex and educational attainment are
+included in the OLS baseline but are absorbed by individual fixed effects in panel specifications.
+ 
+% Summary statistics for the analytical sample are reported in Table 1 of the appendix.
+ 
+% ---------------------------------------------------------------
+% 4. METHODOLOGY
+% ---------------------------------------------------------------
+\section{Methodology}
+ 
+\subsection{Baseline OLS}
+ 
+As a baseline, we estimate a pooled OLS regression of the form:
+ 
+\begin{equation}
+    S_{it} = \alpha + \beta_{1} \text{Tenure}_{it} + \mathbf{X}_{it}'\boldsymbol{\gamma}
+    + \delta_{r} + \lambda_{t} + \varepsilon_{it}
+\end{equation}
+ 
+where $S_{it}$ is the life satisfaction score for individual $i$ in wave $t$,
+$\text{Tenure}_{it}$ is a vector of tenure dummies, $\mathbf{X}_{it}$ is the vector of time-varying controls, $\delta_{r}$ denotes region fixed effects, and $\lambda_{t}$
+denotes wave fixed effects. The OLS estimate of $\beta_{1}$ is likely to be
+upward-biased because individuals who purchase homes are systematically
+different from renters along unobserved dimensions such as
+financial stability, future-orientation, and stable personal
+relationships, all of which independently predict higher life satisfaction.
+ 
+\subsection{Fixed Effects}
+ 
+To address selection on time-invariant unobservables, our preferred
+specification is a two-way fixed effects (TWFE) model:
+\begin{equation}
+    S_{it} = \alpha_{i} + \lambda_{t} + \beta_{1}\,\text{Tenure}_{it} +
+    \mathbf{X}_{it}'\boldsymbol{\gamma} + \varepsilon_{it}
+\end{equation}
+where $\alpha_{i}$ absorbs all time-invariant individual characteristics,
+observed or otherwise. Identification of $\beta_{1}$ comes exclusively from
+individuals who change tenure between waves, and wave fixed effects
+$\lambda_{t}$ absorb common time shocks including the pandemic and aggregate
+housing market movements.
+ 
+We justify the fixed effects over pooled OLS using an F-test for the joint significance of individual effects ($F = 4.057$, $p < 0.001$), rejecting the null of no unobserved heterogeneity.
+To choose between fixed and random effects, we use a Hausman test, which strongly rejects the null that individual effects are uncorrelated with the regressors ($\chi^{2}(11) = 2228.8$, $p < 0.001$), indicating correlation between individual effects and regressors \citet{Hausman1978}. 
+
+Finally, a Breusch--Godfrey-type test detects serial correlation in the idiosyncratic error term ($p < 0.001$), consistent with repeated observations. We therefore cluster standard errors at the individual level to allow for within-person correlation over time. 
+ 
+\subsection{Heterogeneity Analysis}
+ 
+To examine generational differences, we re-estimate the TWFE model
+separately for respondents under 40 and those aged 40 plus. We also
+include interactions between tenure and the COVID-19 dummy to test whether
+ownership provided an additional buffer to life satisfaction during the
+pandemic.
+ 
+\subsection{Instrumental Variables}
+
+A limitation of the TWFE is that it fails to control for time-varying unobservables, creating bias. We attempt to address this using an
+instrumental variables (IV) strategy.
+ 
+Our proposed instrument is the log of the regional house price index,
+constructed from Land Registry data and merged into the panel.  It satisfies relevance, since higher house
+prices reduce the affordability of homeownership, mechanically reducing the
+probability of purchase for liquidity-constrained households. The exclusion
+restriction requires that price levels affect life satisfaction only
+through tenure. We argue that this is plausible conditional on region and time fixed effects, which absorb time-invariant regional characteristics and common macroeconomic shocks, so identification relies on within-region variation over time. 
+ 
+% ---------------------------------------------------------------
+% 5. RESULTS
+% ---------------------------------------------------------------
+\section{Results}
+ 
+\subsection{Main Results}
+ 
+Table 2 presents the main results. Column (1) reports the pooled OLS
+estimate; Column (2) the TWFE estimate; and Column (3) the TWFE model with
+tenure--COVID interactions.
+ 
+The OLS estimates in Column (1) indicate a substantial raw association
+between homeownership and life satisfaction. Relative to private renters,
+mortgaged owners score 0.227 points higher and outright owners 0.299 points
+higher, both highly significant. Social renters score 0.139 points lower
+than private renters, consistent with the literature on neighbourhood effects
+associated with social housing \citep{Rohe2002}.
+ 
+Column (2) shows that these associations substantially attenuate under
+individual fixed effects. The coefficient on outright ownership falls from
+0.299 to 0.077 --- a reduction of approximately 74 percent --- and remains
+significant at the one percent level. The mortgage coefficient falls from
+0.227 to 0.031 and is not significant under clustered standard errors
+($p = 0.109$). The social rent coefficient becomes indistinguishable from
+zero. This attenuation indicates that the majority of the raw association
+reflects positive selection: individuals who purchase homes are
+systematically happier along unobserved time-invariant dimensions.
+\citet{Will2024} document a similar pattern for Germany.
+ 
+The near-zero mortgage coefficient is consistent with \citet{ViforJ2024},
+who find that mortgage debt depresses the wellbeing benefits of ownership. The financial burden of servicing a mortgage may offset any benefits. 
+
+An interaction specification adding tenure--COVID dummies (Column 3) yields no significant interactions, suggesting that homeownership did not provide an additional buffer during the pandemic.
+
+The results are robust in restricting the sample to tenure changers only and replacing life satisfaction with the GHQ-12 distress score (Table 5).
+
+ 
+\subsection{Age Heterogeneity}
+ 
+Table 3 presents TWFE estimates by age group. Among respondents under 40,
+no tenure category is associated with a statistically significant change in
+life satisfaction: the coefficient on outright ownership is 0.035
+($p = 0.223$) and on mortgaged ownership 0.032 ($p = 0.158$). Among
+respondents aged 40 plus, outright ownership approaches significance at
+the ten percent level (0.058, $p = 0.050$), while mortgaged ownership
+remains negligible.
+ 
+For younger adults, homeownership does not appear to deliver the life
+satisfaction premium that motivates the aspiration to own. Younger
+homeowners are more likely to carry substantial mortgage debt, and the
+associated financial strain may offset any security benefit \citep{ViforJ2024}.
+Policies designed to facilitate entry into mortgaged ownership among
+younger households --- such as Help to Buy or the Lifetime ISA --- may deliver limited wellbeing returns if the satisfaction premium
+is contingent on debt-free ownership.
+
+
+% \subsection{COVID-19 Interaction}
+ 
+%Column (3) augments the TWFE model with interactions between each tenure category and the COVID-19 dummy. None of the interaction terms is statistically significant. The coefficient on outright ownership during COVID is $-0.032$ ($p = 0.156$), and the mortgage interaction is $0.007$ ($p = 0.765$). These null results suggest that homeownership did not provide a measurable additional buffer to life satisfaction during the pandemic, which is consistent with the ownership effect operating through long-run financial security rather than the physical attributes of the dwelling.
+
+%\subsection{Robustness}
+ 
+%Table 5 reports two robustness checks. First, restricting the sample to the 16,170 individuals who changed tenure at least once (Column 2) yields an outright ownership coefficient of 0.058 ($p = 0.003$), smaller than but consistent with the full-sample estimate, suggesting the result is not driven by cross-sectional variation between permanent owners and renters. Second, replacing life satisfaction with the GHQ-12 psychological distress score (Column 3) yields a coefficient of $-0.165$ ($p = 0.016$) on outright ownership, indicating lower distress among outright owners and corroborating the life satisfaction finding through an independent wellbeing measure.
+ 
+\subsection{Instrumental Variables}
+ 
+Table 4 presents the OLS, TWFE, and IV estimates using a binary owner/renter
+dummy. The OLS premium is 0.307 (Column 1), falling to 0.057 under fixed
+effects (Column 2). The IV estimate in Column (3) is $-2.298$ but is not
+statistically significant ($p = 0.222$).
+ 
+The weak instrument F-statistic is 4.975, well below the threshold of 10
+recommended by \citet{Staiger1997}, indicating that the regional house price
+index does not predict individual tenure status with sufficient precision.
+Under weak instruments, two-stage least squares estimates are biased and
+standard errors unreliable \citep{Staiger1997}, accounting for the
+implausible sign and magnitude of the IV coefficient. The Wu-Hausman test
+does not reject the consistency of OLS ($p = 0.077$), suggesting that endogeneity
+may be less severe than feared and supporting TWFE as the preferred
+specification.
+ 
+% ---------------------------------------------------------------
+% 6. CONCLUSION
+% ---------------------------------------------------------------
+\section{Conclusion}
+ 
+This paper examined housing tenure and life satisfaction in the UK using ten waves of Understanding Society (2013--2022). Three findings emerge.
+ 
+First, the positive association between homeownership and life satisfaction in OLS is driven by selection bias. Once individual fixed effects are introduced, the outright ownership premium falls approximately 74 percent, while the premium for mortgaged ownership becomes statistically insignificant, mirroring the pattern documented by \citet{Will2024}.
+ 
+Second, the residual positive effect in the TWFE framework is confined to debt-free outright ownership and to respondents aged 40 plus. Among under-40s, no ownership category is associated with a significant improvement in life satisfaction, consistent with the heterogeneity by age and debt status documented by \citet{ViforJ2024}.
+ 
+Third, homeownership did not provide an additional buffer for life satisfaction during COVID-19, and the IV strategy is undermined by a weak first stage. The exclusion restriction is also difficult to defend fully: regional house prices may affect life satisfaction through channels other than tenure, such as local cost of living or wealth expectations. For future research, Credible causal identification likely requires sharper instruments, such as discontinuities in stamp duty thresholds or Right to Buy policy variation across devolved nations.
+ 
+% ---------------------------------------------------------------
+% REFERENCES
+% ---------------------------------------------------------------
+\newpage
+\bibliographystyle{agsm}
+\begin{thebibliography}{99}
+ 
+\bibitem[Cho et al.(2023)]{Cho2023}
+Cho, H., Kim, J., and Park, G. (2023).
+Does homeownership increase happiness? Empirical evidence from Korean
+Labor and Income Panel Study Data.
+\textit{Journal of Happiness Studies}, 24(3), 1--22.
+ 
+\bibitem[Cribb et al.(2018)]{Cribb2018}
+Cribb, J., Hood, A., and Hoyle, J. (2018).
+\textit{The decline of homeownership among young adults}.
+London: Institute for Fiscal Studies.
+ 
+\bibitem[Hausman(1978)]{Hausman1978}
+Hausman, J.~A. (1978).
+Specification tests in econometrics.
+\textit{Econometrica}, 46(6), 1251--1271.
+ 
+\bibitem[Rohe et al.(2002)]{Rohe2002}
+Rohe, W., Van Zandt, S., and McCarthy, G. (2002).
+Home ownership and access to opportunity.
+\textit{Housing Policy Debate}, 13(1), 51--86.
+ 
+\bibitem[Staiger and Stock(1997)]{Staiger1997}
+Staiger, D. and Stock, J.~H. (1997).
+Instrumental variables regression with weak instruments.
+\textit{Econometrica}, 65(3), 557--586.
+ 
+\bibitem[University of Essex(2023)]{UKHLS2023}
+University of Essex, Institute for Social and Economic Research (2023).
+\textit{Understanding Society: Waves 1--15, 2009--2024 and Harmonised
+BHPS: Waves 1--18, 1991--2009} [data collection], 18th Edition.
+UK Data Service. SN: 6614.
+ 
+\bibitem[ViforJ et al.(2024)]{ViforJ2024}
+ViforJ, R.~O., Suenaga, H., and Brierty, R. (2024).
+Homeownership and subjective well-being: Are the links heterogeneous
+across location, age and income?
+\textit{Urban Studies}, 61(5), 859--877.
+ 
+\bibitem[Will and Renz(2024)]{Will2024}
+Will, S. and Renz, T. (2024).
+In debt but still happy? Homeownership and the satisfactions with
+housing and life.
+\textit{Journal of Housing Research}, 34(1), 29--59.
+ 
+\end{thebibliography}
+ 
+% ---------------------------------------------------------------
+% APPENDIX
+% ---------------------------------------------------------------
+\newpage
+\appendix
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+
+% ---------------------------------------------------------------
+% TABLE 1: SUMMARY STATISTICS
+% ---------------------------------------------------------------
+\clearpage
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Notes:} Source: Understanding Society (UKHLS), Waves e--n,
+2013--2022, SN 6614. The analytical sample of 312,942 reflects listwise
+deletion of observations missing on any regression variable, including
+22,996 observations missing on housing tenure. Tenure shares are
+percentages of non-missing observations and exclude employer-provided
+accommodation and residual ``other'' categories. Net monthly income
+is reported as the median due to right skew; the log transformation
+applied in regressions reduces the influence of outliers. Partnered
+includes married and cohabiting respondents.
+\end{TableNotes}
+
+\begin{longtable}{lcccc}
+\caption{Summary Statistics}
+\label{tab:sumstats} \\
+\toprule
+Variable & Mean & Std.\ Dev. & Min & Max \\
+\midrule
+\endfirsthead
+\caption*{Table 1 (continued)} \\
+\toprule
+Variable & Mean & Std.\ Dev. & Min & Max \\
+\midrule
+\endhead
+\midrule
+\insertTableNotes
+\endlastfoot
+
+\multicolumn{5}{l}{\textit{Panel structure}} \\[0.2em]
+Full dataset (person-wave obs.)         & 366{,}618 & -- & -- & -- \\
+Analytical sample                       & 312{,}942 & -- & -- & -- \\
+Unique individuals                      & 71{,}131  & -- & -- & -- \\
+Waves (e--n, 2013--2022)                & 10        & -- & -- & -- \\[0.4em]
+
+\multicolumn{5}{l}{\textit{Outcome variable}} \\[0.2em]
+Life satisfaction (1--7)   & 5.17  & 1.45 & 1 & 7 \\[0.4em]
+
+\multicolumn{5}{l}{\textit{Housing tenure (\% of non-missing obs.)}} \\[0.2em]
+Owned outright             & 37.3  & --   & 0 & 1 \\
+Mortgage                   & 38.5  & --   & 0 & 1 \\
+Social rent                & 16.1  & --   & 0 & 1 \\
+Private rent               & 8.0   & --   & 0 & 1 \\[0.4em]
+
+\multicolumn{5}{l}{\textit{Demographics}} \\[0.2em]
+Age (years)                & 49.2  & 18.8 & 16 & 103 \\
+Female (\%)                & 54.7  & --   & 0  & 1   \\
+Partnered (\%)             & 75.1  & --   & 0  & 1   \\
+Number of children         & 0.44  & 0.87 & 0  & 9   \\[0.4em]
+
+\multicolumn{5}{l}{\textit{Economic variables}} \\[0.2em]
+Net monthly income (median, \textsterling) & 1{,}342 & -- & 0 & -- \\
+Unemployed (\%)            & 4.3   & --   & 0 & 1 \\
+Retired (\%)               & 25.1  & --   & 0 & 1 \\
+Long-term sick (\%)        & 3.4   & --   & 0 & 1 \\
+\bottomrule
+\end{longtable}
+\end{ThreePartTable}
+
+% ---------------------------------------------------------------
+% TABLE 2: MAIN REGRESSION RESULTS
+% ---------------------------------------------------------------
+\clearpage
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Notes:} Dependent variable is life satisfaction on a 1--7
+scale. Reference tenure category is private rent. Standard errors in
+parentheses. Column (1) includes region and wave fixed effects; sex and education are
+included as a control. Columns (2) and (3) use two-way fixed effects
+(individual and wave); sex and education are absorbed by the individual
+fixed effect. The negative adjusted $R^{2}$ in Columns (2) and (3) is
+standard in two-way fixed effects models with large numbers of individual
+effects.
+$^{*}p < 0.10$, $^{**}p < 0.05$, $^{***}p < 0.01$.
+\end{TableNotes}
+
+\begin{longtable}{lccc}
+\caption{Housing Tenure and Life Satisfaction, UK 2013--2022}
+\label{tab:main} \\
+\toprule
+ & (1) & (2) & (3) \\
+ & OLS & FE & FE $\times$ COVID \\
+\midrule
+\endfirsthead
+\caption*{Table 2 (continued)} \\
+\toprule
+ & (1) & (2) & (3) \\
+ & OLS & FE & FE $\times$ COVID \\
+\midrule
+\endhead
+\midrule
+\insertTableNotes
+\endlastfoot
+
+\textit{Reference: Private rent} & & & \\[0.3em]
+Social rent
+  & $-0.142^{***}$ & $-0.005$    & $-0.008$    \\
+  & $(0.011)$      & $(0.022)$   & $(0.022)$   \\[0.3em]
+Mortgage
+  & $0.227^{***}$  & $0.031^{*}$ & $0.029^{*}$ \\
+  & $(0.010)$      & $(0.017)$   & $(0.018)$   \\[0.3em]
+Owned outright
+  & $0.299^{***}$  & $0.077^{***}$ & $0.084^{***}$ \\
+  & $(0.010)$      & $(0.019)$     & $(0.019)$     \\[0.5em]
+Age
+  & $-0.024^{***}$ & $-0.006$  & $-0.008$  \\
+  & $(0.001)$      & $(0.008)$ & $(0.008)$ \\[0.3em]
+Age$^{2}$
+  & $0.0002^{***}$ & $0.0004^{***}$ & $0.0004^{***}$ \\
+  & $(0.00001)$    & $(0.00002)$    & $(0.00002)$    \\[0.3em]
+Log income
+  & $0.013^{***}$ & $-0.002$ & $-0.001$ \\
+  & $(0.001)$     & $(0.002)$ & $(0.002)$ \\[0.3em]
+Partnered
+  & $0.138^{***}$ & $0.002$   & $0.002$   \\
+  & $(0.006)$     & $(0.011)$ & $(0.011)$ \\[0.3em]
+Number of children
+  & $0.034^{***}$ & $0.005$   & $0.006$   \\
+  & $(0.003)$     & $(0.006)$ & $(0.006)$ \\[0.3em]
+Unemployed
+  & $-0.665^{***}$ & $-0.312^{***}$ & $-0.312^{***}$ \\
+  & $(0.013)$      & $(0.014)$      & $(0.014)$      \\[0.3em]
+Retired
+  & $0.188^{***}$ & $0.108^{***}$ & $0.109^{***}$ \\
+  & $(0.010)$     & $(0.013)$     & $(0.013)$     \\[0.3em]
+Long-term sick
+  & $-1.497^{***}$ & $-0.566^{***}$ & $-0.565^{***}$ \\
+  & $(0.015)$      & $(0.021)$      & $(0.021)$      \\[0.3em]
+COVID dummy
+  & $0.075^{***}$ &         &       \\
+  & $(0.011)$     &         &       \\[0.5em]
+Social rent $\times$ COVID   & & & $0.016$  \\
+                             & & & $(0.025)$ \\[0.3em]
+Mortgage $\times$ COVID      & & & $0.007$  \\
+                             & & & $(0.022)$ \\[0.3em]
+Owned outright $\times$ COVID & & & $-0.032$ \\
+                              & & & $(0.022)$ \\[0.5em]
+Individual FE & No  & Yes & Yes \\
+Wave FE       & Yes & Yes & Yes \\
+Region FE     & Yes & No  & No  \\
+\midrule
+Observations  & 312{,}823 & 312{,}942 & 312{,}942 \\
+$R^{2}$       & 0.087     & 0.006     & 0.006     \\
+Adj.\ $R^{2}$ & 0.087     & $-0.241$  & $-0.241$  \\
+\bottomrule
+\end{longtable}
+\end{ThreePartTable}
+
+% ---------------------------------------------------------------
+% TABLE 3: AGE HETEROGENEITY
+% ---------------------------------------------------------------
+\clearpage
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Notes:} Dependent variable is life satisfaction on a 1--7
+scale. Reference tenure category is private rent. Two-way fixed effects
+(individual and wave). Standard errors in parentheses. The retired
+coefficient in Column (1) is imprecisely estimated due to the small
+number of retired individuals below age 40.
+$^{*}p < 0.10$, $^{**}p < 0.05$, $^{***}p < 0.01$.
+\end{TableNotes}
+
+\begin{longtable}{lcc}
+\caption{Fixed Effects Estimates by Age Group}
+\label{tab:age} \\
+\toprule
+ & (1) & (2) \\
+ & Under 40 & Aged 40 and over \\
+\midrule
+\endfirsthead
+\caption*{Table 3 (continued)} \\
+\toprule
+ & (1) & (2) \\
+ & Under 40 & Aged 40 and over \\
+\midrule
+\endhead
+\midrule
+\insertTableNotes
+\endlastfoot
+
+\textit{Reference: Private rent} & & \\[0.3em]
+Social rent
+  & $0.005$   & $-0.011$ \\
+  & $(0.030)$ & $(0.033)$ \\[0.3em]
+Mortgage
+  & $0.032$   & $0.002$  \\
+  & $(0.023)$ & $(0.028)$ \\[0.3em]
+Owned outright
+  & $0.035$       & $0.058^{*}$   \\
+  & $(0.028)$     & $(0.029)$     \\[0.5em]
+Age
+  & $0.018$   & $0.040^{***}$ \\
+  & $(0.019)$ & $(0.012)$     \\[0.3em]
+Age$^{2}$
+  & $0.001^{***}$ & $0.00004$  \\
+  & $(0.0002)$    & $(0.00004)$ \\[0.3em]
+Log income
+  & $-0.005^{*}$ & $0.009^{***}$ \\
+  & $(0.002)$    & $(0.002)$     \\[0.3em]
+Partnered
+  & $-0.052^{***}$ & $0.035^{**}$ \\
+  & $(0.017)$      & $(0.015)$    \\[0.3em]
+Number of children
+  & $0.026^{**}$ & $0.027^{***}$ \\
+  & $(0.011)$    & $(0.010)$     \\[0.3em]
+Unemployed
+  & $-0.300^{***}$ & $-0.310^{***}$ \\
+  & $(0.020)$      & $(0.021)$      \\[0.3em]
+Retired
+  & $-0.373$  & $0.113^{***}$ \\
+  & $(0.326)$ & $(0.014)$     \\[0.3em]
+Long-term sick
+  & $-0.700^{***}$ & $-0.516^{***}$ \\
+  & $(0.046)$      & $(0.025)$      \\[0.5em]
+Individual FE      & Yes    & Yes     \\
+Wave FE            & Yes    & Yes     \\
+\midrule
+Observations       & 96{,}133 & 216{,}809 \\
+Unique individuals & 26{,}441 & 40{,}422  \\
+$R^{2}$            & 0.007    & 0.005     \\
+\bottomrule
+\end{longtable}
+\end{ThreePartTable}
+
+% ---------------------------------------------------------------
+% TABLE 4: OLS vs FE vs IV
+% ---------------------------------------------------------------
+\clearpage
+\begin{table}[H]
+\centering
+\caption{OLS, Fixed Effects, and IV Estimates of the Ownership Premium}
+\label{tab:iv}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+ & (1) & (2) & (3) \\
+ & OLS & Fixed Effects & IV \\
+\midrule
+Owner ($= 1$)
+  & $0.307^{***}$ & $0.057^{***}$ & $-2.298$ \\
+  & $(0.006)$     & $(0.011)$     & $(1.881)$ \\[0.5em]
+Controls      & Yes & Yes & Yes \\
+Individual FE & No  & Yes & No  \\
+Wave FE       & Yes & Yes & Yes \\
+Region FE     & Yes & No  & Yes \\
+\midrule
+Observations  & 332{,}501 & 332{,}652 & 332{,}515 \\
+$R^{2}$       & 0.084     & 0.006     & --        \\[0.5em]
+\multicolumn{4}{l}{\textit{IV diagnostics (Column 3 only)}} \\[0.2em]
+Weak instruments $F$ & & & 4.975 \\
+Wu-Hausman $p$-value & & & 0.077 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Dependent variable is life satisfaction on a 1--7
+scale. Owner is a binary indicator equal to 1 if the respondent owns
+their home outright or with a mortgage. The instrument in Column (3)
+is the log of the regional average house price from the Land Registry
+UK House Price Index, merged by Government Office Region and year.
+The weak instrument $F$-statistic of 4.975 falls below the threshold
+of 10 \citep{Staiger1997}; the IV estimate should not be interpreted
+causally. Standard errors in parentheses.
+$^{*}p < 0.10$, $^{**}p < 0.05$, $^{***}p < 0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+% ---------------------------------------------------------------
+% TABLE 5: ROBUSTNESS CHECKS
+% ---------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Robustness Checks}
+\label{tab:robust}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+ & (1) & (2) & (3) \\
+ & Main FE & Changers only & GHQ-12 score \\
+ & \textit{DV: Life sat.} & \textit{DV: Life sat.} & \textit{DV: Distress} \\
+\midrule
+\textit{Reference: Private rent} & & & \\[0.3em]
+Social rent
+  & $-0.005$      & $-0.009$      & $0.142^{*}$  \\
+  & $(0.022)$     & $(0.022)$     & $(0.078)$    \\[0.3em]
+Mortgage
+  & $0.031^{*}$   & $0.036^{*}$   & $0.187^{**}$ \\
+  & $(0.017)$     & $(0.017)$     & $(0.062)$    \\[0.3em]
+Owned outright
+  & $0.077^{***}$ & $0.058^{**}$  & $-0.165^{*}$ \\
+  & $(0.019)$     & $(0.019)$     & $(0.068)$    \\[0.5em]
+Individual FE      & Yes     & Yes     & Yes     \\
+Wave FE            & Yes     & Yes     & Yes     \\
+\midrule
+Observations       & 312{,}942 & 100{,}446 & 314{,}099 \\
+Unique individuals & 62{,}382  & 16{,}170  & 62{,}957  \\
+$R^{2}$            & 0.006     & 0.010     & 0.010     \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} All columns use two-way fixed effects (individual
+and wave). Reference tenure category is private rent. Column (1)
+reproduces the main result from Table 2. Column (2) restricts to the
+16,170 individuals who changed tenure at least once (100,446
+observations). Column (3) replaces life satisfaction with the GHQ-12
+psychological distress score; higher values indicate greater distress,
+so the expected sign on ownership is negative. Standard errors in
+parentheses.
+$^{*}p < 0.10$, $^{**}p < 0.05$, $^{***}p < 0.01$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+% ---------------------------------------------------------------
+% TABLE 6: VARIABLE DEFINITIONS
+% ---------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Variable Names and Definitions}
+\label{tab:variables}
+\begin{threeparttable}
+\begin{tabular}{p{2.8cm}p{3.2cm}p{7.2cm}}
+\toprule
+Variable & UKHLS source & Definition \\
+\midrule
+\texttt{sclfsato}
+  & \textit{w}\_sclfsato
+  & Life satisfaction, 1--7 scale \\[0.3em]
+\texttt{scghq1\_dv}
+  & \textit{w}\_scghq1\_dv
+  & GHQ-12 psychological distress score; higher = greater distress \\[0.3em]
+\texttt{tenure\_dv}
+  & \textit{w}\_tenure\_dv
+  & Housing tenure; 8 raw categories collapsed to 4 (see text) \\[0.3em]
+\texttt{owner}
+  & Derived
+  & Binary: 1 if owned outright or mortgaged, 0 otherwise \\[0.3em]
+\texttt{dvage}
+  & \textit{w}\_dvage
+  & Age in years \\[0.3em]
+\texttt{sex}
+  & \textit{w}\_sex
+  & Sex (1 = male, 2 = female) \\[0.3em]
+\texttt{mastat\_dv}
+  & \textit{w}\_mastat\_dv
+  & Marital status; partnered = 1 if married or cohabiting \\[0.3em]
+\texttt{nchild\_dv}
+  & \textit{w}\_nchild\_dv
+  & Number of dependent children in household \\[0.3em]
+\texttt{hiqual\_dv}
+  & \textit{w}\_hiqual\_dv
+  & Highest educational qualification; absorbed by individual FE \\[0.3em]
+\texttt{jbstat}
+  & \textit{w}\_jbstat
+  & Employment status; dummies for unemployed (3), retired (4), sick (8) \\[0.3em]
+\texttt{fimnnet\_dv}
+  & \textit{w}\_fimnnet\_dv
+  & Net personal monthly income (\textsterling); log-transformed \\[0.3em]
+\texttt{gor\_dv}
+  & \textit{w}\_gor\_dv
+  & Government Office Region, codes 1--12 \\[0.3em]
+\texttt{log\_hpi}
+  & Land Registry HPI
+  & Log average house price by region and year; IV instrument \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Prefix \textit{w}\_ denotes the wave letter
+(e--n). All variables from Understanding Society SN 6614
+(\texttt{indresp} or \texttt{hhresp} files) except \texttt{log\_hpi},
+which is merged from the Land Registry UK House Price Index by
+Government Office Region and year. Negative values in UKHLS variables
+are missing value codes and are recoded to \texttt{NA} prior to analysis.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{document}
